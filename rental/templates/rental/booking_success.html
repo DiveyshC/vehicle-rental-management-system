@@ -1,0 +1,345 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Confirmed | DriveGo</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="{% url 'home' %}" class="logo">
+            🚘 Drive<span>Go</span>
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#contact">
+                Contact
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= SUCCESS SECTION ================= -->
+
+<section class="booking-success-section">
+
+    <div class="container">
+
+        <div class="success-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <!-- TITLE -->
+
+            <p class="success-small">
+                DRIVEGO
+            </p>
+
+            <h1>
+                Booking Confirmed!
+            </h1>
+
+            <p class="success-message">
+                Your vehicle booking and payment have been
+                successfully completed.
+            </p>
+
+
+            <!-- ================= BOOKING ID ================= -->
+
+            <div class="booking-id-box">
+
+                <span>
+                    Booking ID
+                </span>
+
+                <strong>
+                    #{{ booking.id }}
+                </strong>
+
+            </div>
+
+
+            <!-- ================= DETAILS ================= -->
+
+            <div class="confirmation-details">
+
+
+                <!-- Vehicle -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Vehicle
+                    </strong>
+
+                    <span>
+                        {{ booking.vehicle.brand }}
+                        {{ booking.vehicle.name }}
+                    </span>
+
+                </div>
+
+
+                <!-- Pickup Date -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Pickup Date
+                    </strong>
+
+                    <span>
+                        {{ booking.pickup_date|date:"d M Y" }}
+                    </span>
+
+                </div>
+
+
+                <!-- Return Date -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Return Date
+                    </strong>
+
+                    <span>
+                        {{ booking.return_date|date:"d M Y" }}
+                    </span>
+
+                </div>
+
+
+                <!-- Pickup Location -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Pickup Location
+                    </strong>
+
+                    <span>
+                        {{ booking.pickup_location }}
+                    </span>
+
+                </div>
+
+
+                <!-- Customer -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Customer
+                    </strong>
+
+                    <span>
+                        {{ booking.customer_name }}
+                    </span>
+
+                </div>
+
+
+                <!-- Booking Status -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Booking Status
+                    </strong>
+
+                    <span>
+                        {{ booking.get_status_display }}
+                    </span>
+
+                </div>
+
+
+                <!-- Payment Status -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Payment Status
+                    </strong>
+
+                    <span style="color:#28a745;font-weight:700;">
+                        {{ booking.get_payment_status_display }}
+                    </span>
+
+                </div>
+
+
+                <!-- Payment ID -->
+
+                <div class="confirmation-item">
+
+                    <strong>
+                        Payment ID
+                    </strong>
+
+                    <span>
+                        {{ booking.payment_id }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TOTAL ================= -->
+
+            <div class="total-box">
+
+                <span>
+                    Total Rental Amount
+                </span>
+
+                <strong>
+                    ₹{{ booking.total_amount }}
+                </strong>
+
+            </div>
+
+
+            <!-- ================= PAYMENT MESSAGE ================= -->
+
+            {% if booking.payment_status == 'paid' %}
+
+                <div class="status-box">
+
+                    <strong>
+                        Payment:
+                    </strong>
+
+                    <span style="color:#28a745;">
+                        Paid Successfully ✓
+                    </span>
+
+                </div>
+
+            {% else %}
+
+                <div class="status-box">
+
+                    <strong>
+                        Payment:
+                    </strong>
+
+                    <span>
+                        {{ booking.get_payment_status_display }}
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ================= NOTE ================= -->
+
+            <p class="success-note">
+
+                Please keep your Booking ID and Payment ID
+                for future reference.
+
+            </p>
+
+
+            <!-- ================= BUTTONS ================= -->
+
+            <div class="success-buttons">
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="success-btn"
+                >
+                    Go to Dashboard
+                </a>
+
+
+                <a
+                    href="{% url 'vehicles' %}"
+                    class="success-home-btn"
+                >
+                    Browse More Vehicles
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DriveGo. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="{% static 'rental/js/script.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,372 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        DriveGo | About Us
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'rental/css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a
+            href="{% url 'home' %}"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                🚘
+            </span>
+
+            Drive<span>Go</span>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a
+                href="{% url 'about' %}"
+                class="active"
+            >
+                About
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            {% if user.is_authenticated %}
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="login-btn"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="register-btn"
+                >
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'login' %}"
+                    class="login-btn"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="register-btn"
+                >
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<section class="about-section">
+
+    <div class="container about-container">
+
+
+        <div class="about-content">
+
+            <p class="section-label">
+                ABOUT DRIVEGO
+            </p>
+
+
+            <h2>
+                A Smarter Way To
+                Rent Your Next Vehicle
+            </h2>
+
+
+            <p>
+                DriveGo is a vehicle rental management platform
+                designed to make the rental process simple,
+                convenient and easy to manage.
+            </p>
+
+
+            <p>
+                Customers can explore available vehicles,
+                compare rental options, make bookings and
+                manage their rental activity from one place.
+            </p>
+
+
+            <p>
+                The platform provides a simple interface for
+                discovering vehicles, selecting rental dates
+                and managing booking activity.
+            </p>
+
+
+            <a
+                href="{% url 'vehicles' %}"
+                class="primary-btn"
+            >
+
+                Explore Our Fleet
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div class="about-stat-box">
+
+
+            <div class="stat">
+
+                <strong>
+                    01
+                </strong>
+
+                <span>
+                    Simple booking platform
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    02
+                </strong>
+
+                <span>
+                    Multiple vehicle categories
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    03
+                </strong>
+
+                <span>
+                    Flexible rental dates
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    04
+                </strong>
+
+                <span>
+                    Booking management
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta-section">
+
+    <div class="container cta-content">
+
+        <div>
+
+            <p>
+                READY FOR YOUR NEXT JOURNEY?
+            </p>
+
+            <h2>
+                Explore The DriveGo Fleet.
+            </h2>
+
+        </div>
+
+        <a
+            href="{% url 'vehicles' %}"
+            class="cta-btn"
+        >
+
+            Explore Vehicles
+
+            <span>
+                →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div class="footer-brand">
+
+            <a
+                href="{% url 'home' %}"
+                class="logo footer-logo"
+            >
+
+                <span class="logo-icon">
+                    🚘
+                </span>
+
+                Drive<span>Go</span>
+
+            </a>
+
+            <p>
+                A modern vehicle rental management platform
+                designed to make finding and booking your
+                next ride simple.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Mumbai, Maharashtra
+            </p>
+
+            <p>
+                📞 +91 98765 43210
+            </p>
+
+            <p>
+                ✉️ support@drivego.com
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 DriveGo.
+            Vehicle Rental Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

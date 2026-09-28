@@ -1,0 +1,576 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | DriveGo</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            <span class="logo-icon">
+                🚘
+            </span>
+
+            Drive<span>Go</span>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            <span class="welcome-user">
+                Hi, {{ request.user.username }}
+            </span>
+
+            <a href="{% url 'logout' %}"
+               class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<main>
+
+<section class="dashboard-section">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             DASHBOARD HEADER
+        ================================================== -->
+
+        <div class="dashboard-header">
+
+
+            <div>
+
+                <p class="dashboard-label">
+                    DRIVEGO ACCOUNT
+                </p>
+
+
+                <h1>
+                    Welcome back,
+                    <span>{{ request.user.username }}</span>
+                </h1>
+
+
+                <p>
+                    Manage your vehicle rentals and keep track
+                    of your bookings in one place.
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'vehicles' %}"
+               class="dashboard-book-btn">
+
+                <span>+</span>
+                Book a Vehicle
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MESSAGES
+        ================================================== -->
+
+        {% if messages %}
+
+            <div class="dashboard-messages">
+
+                {% for message in messages %}
+
+                    <div class="dashboard-message">
+
+                        <span>✓</span>
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             ACCOUNT CARD
+        ================================================== -->
+
+        <div class="account-card">
+
+
+            <div class="account-info-main">
+
+                <div class="account-avatar">
+                    {{ request.user.username|first|upper }}
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Logged in as
+                    </span>
+
+                    <strong>
+                        {{ request.user.username }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="account-detail">
+
+                <span>
+                    Email Address
+                </span>
+
+                <strong>
+                    {{ request.user.email }}
+                </strong>
+
+            </div>
+
+
+            <div class="account-detail">
+
+                <span>
+                    Account
+                </span>
+
+                <strong class="account-active">
+                    Active
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOOKINGS HEADING
+        ================================================== -->
+
+        <div class="dashboard-title">
+
+
+            <div>
+
+                <p>
+                    RENTAL ACTIVITY
+                </p>
+
+                <h2>
+                    My Bookings
+                </h2>
+
+            </div>
+
+
+            <span>
+                Your vehicle rental history
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOOKINGS
+        ================================================== -->
+
+        {% if bookings %}
+
+            <div class="booking-list">
+
+
+                {% for booking in bookings %}
+
+                    <article class="dashboard-booking-card">
+
+
+                        <!-- =================================
+                             VEHICLE
+                        ================================== -->
+
+                        <div class="dashboard-vehicle">
+
+
+                            <div class="dashboard-image-wrapper">
+
+                                {% if booking.vehicle.image %}
+
+                                    <img
+                                        src="{{ booking.vehicle.image.url }}"
+                                        alt="{{ booking.vehicle.brand }} {{ booking.vehicle.name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="dashboard-placeholder">
+                                        🚘
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="dashboard-vehicle-info">
+
+                                <span class="dashboard-vehicle-type">
+
+                                    {{ booking.vehicle.get_vehicle_type_display }}
+
+                                </span>
+
+
+                                <h3>
+
+                                    {{ booking.vehicle.brand }}
+                                    {{ booking.vehicle.name }}
+
+                                </h3>
+
+
+                                <p>
+                                    Booking #{{ booking.id }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- =================================
+                             BOOKING DETAILS
+                        ================================== -->
+
+                        <div class="dashboard-booking-details">
+
+
+                            <div class="booking-detail-item">
+
+                                <span>
+                                    Pickup Date
+                                </span>
+
+                                <strong>
+                                    {{ booking.pickup_date|date:"d M Y" }}
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="booking-detail-item">
+
+                                <span>
+                                    Return Date
+                                </span>
+
+                                <strong>
+                                    {{ booking.return_date|date:"d M Y" }}
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="booking-detail-item">
+
+                                <span>
+                                    Pickup Location
+                                </span>
+
+                                <strong>
+                                    {{ booking.pickup_location }}
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="booking-detail-item">
+
+                                <span>
+                                    Total Amount
+                                </span>
+
+                                <strong class="booking-price">
+                                    ₹{{ booking.total_amount }}
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="booking-detail-item">
+
+                                <span>
+                                    Payment
+                                </span>
+
+
+                                {% if booking.payment_status == 'paid' %}
+
+                                    <strong class="payment-paid">
+                                        Paid ✓
+                                    </strong>
+
+                                {% elif booking.payment_status == 'failed' %}
+
+                                    <strong class="payment-failed">
+                                        Failed
+                                    </strong>
+
+                                {% else %}
+
+                                    <strong class="payment-pending">
+                                        Pending
+                                    </strong>
+
+                                {% endif %}
+
+                            </div>
+
+
+
+                            {% if booking.payment_id %}
+
+                                <div class="booking-detail-item">
+
+                                    <span>
+                                        Payment ID
+                                    </span>
+
+                                    <strong class="payment-id">
+                                        {{ booking.payment_id }}
+                                    </strong>
+
+                                </div>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+
+                        <!-- =================================
+                             STATUS / ACTION
+                        ================================== -->
+
+                        <div class="dashboard-status">
+
+
+                            <div class="booking-status-label">
+
+                                <span>
+                                    Booking Status
+                                </span>
+
+
+                                <span class="status {{ booking.status }}">
+
+                                    {{ booking.get_status_display }}
+
+                                </span>
+
+                            </div>
+
+
+
+                            {% if booking.status == 'pending' or booking.status == 'confirmed' %}
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'cancel_booking' booking.id %}"
+                                    class="cancel-booking-form"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="cancel-booking-btn"
+                                        onclick="return confirm('Are you sure you want to cancel this booking?');"
+                                    >
+
+                                        Cancel Booking
+
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div class="no-bookings">
+
+
+                <div class="no-bookings-icon">
+                    🚗
+                </div>
+
+
+                <p class="empty-label">
+                    YOUR RENTAL ACTIVITY
+                </p>
+
+
+                <h2>
+                    No Bookings Yet
+                </h2>
+
+
+                <p>
+                    You haven't booked a vehicle yet.
+                    Explore our fleet and find the right ride
+                    for your next journey.
+                </p>
+
+
+                <a href="{% url 'vehicles' %}"
+                   class="dashboard-book-btn">
+
+                    Browse Vehicles
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DriveGo.
+                Vehicle Rental Management System.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script src="{% static 'rental/js/script.js' %}"></script>
+
+
+</body>
+
+</html>
