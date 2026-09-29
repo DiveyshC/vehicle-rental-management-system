@@ -135,7 +135,7 @@
                 {% if vehicle.image %}
 
                     <img
-                        src="{{ vehicle.image.url }}"
+                        src="{% static vehicle.image.name %}"
                         alt="{{ vehicle.brand }} {{ vehicle.name }}"
                     >
 
