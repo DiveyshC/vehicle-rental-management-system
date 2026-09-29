@@ -29,6 +29,10 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = 'RENDER' not in os.environ
 
+if not DEBUG:
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
