@@ -1,0 +1,268 @@
+[
+{
+  "model": "rental.vehicle",
+  "pk": 1,
+  "fields": {
+    "name": "Thar",
+    "brand": "Mahindra",
+    "model": "Thar 2025",
+    "vehicle_type": "suv",
+    "registration_number": "MH01AB1234",
+    "price_per_day": "2500.00",
+    "seats": 5,
+    "fuel_type": "diesel",
+    "transmission": "manual",
+    "description": "Premium SUV suitable for city travel and long distance journeys.",
+    "image": "vehicles/Thar.jpg",
+    "is_available": true,
+    "created_at": "2026-09-23T10:30:00.773Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 2,
+  "fields": {
+    "name": "Creta",
+    "brand": "Hyundai",
+    "model": "2025",
+    "vehicle_type": "suv",
+    "registration_number": "MH02EF9012",
+    "price_per_day": "2500.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Comfortable SUV for city and highway travel",
+    "image": "vehicles/Hyundai-Grand-Creta-main.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:31:04.489Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 3,
+  "fields": {
+    "name": "Swift",
+    "brand": "Maruti Suzuki",
+    "model": "2025",
+    "vehicle_type": "car",
+    "registration_number": "MH01AA1001",
+    "price_per_day": "1500.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "manual",
+    "description": "Reliable and economical hatchback suitable for city travel.",
+    "image": "vehicles/Maruti_Swift_2023-Front_right_tracking_shot.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.457Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 4,
+  "fields": {
+    "name": "City",
+    "brand": "Honda",
+    "model": "2025",
+    "vehicle_type": "car",
+    "registration_number": "MH01AA1002",
+    "price_per_day": "2200.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Comfortable sedan perfect for city and highway journeys.",
+    "image": "vehicles/AAB02942.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.461Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 5,
+  "fields": {
+    "name": "Creta",
+    "brand": "Hyundai",
+    "model": "2025",
+    "vehicle_type": "suv",
+    "registration_number": "MH01AA1003",
+    "price_per_day": "2500.00",
+    "seats": 5,
+    "fuel_type": "diesel",
+    "transmission": "automatic",
+    "description": "Premium SUV suitable for family trips and long-distance journeys.",
+    "image": "vehicles/2024_Hyundai_Creta_1.5_MPi_SXO_India_front_view.png",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.464Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 6,
+  "fields": {
+    "name": "Thar",
+    "brand": "Mahindra",
+    "model": "2025",
+    "vehicle_type": "suv",
+    "registration_number": "MH01AA1004",
+    "price_per_day": "3000.00",
+    "seats": 5,
+    "fuel_type": "diesel",
+    "transmission": "manual",
+    "description": "Premium SUV suitable for city travel and adventure journeys.",
+    "image": "vehicles/ai-generated-1782193798108-0.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.467Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 7,
+  "fields": {
+    "name": "Seltos",
+    "brand": "Kia",
+    "model": "2025",
+    "vehicle_type": "suv",
+    "registration_number": "MH01AA1005",
+    "price_per_day": "2800.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Stylish SUV offering comfort, space and modern features.",
+    "image": "vehicles/_AAB0276.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.471Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 8,
+  "fields": {
+    "name": "Innova Crysta",
+    "brand": "Toyota",
+    "model": "2025",
+    "vehicle_type": "suv",
+    "registration_number": "MH01AA1006",
+    "price_per_day": "3500.00",
+    "seats": 7,
+    "fuel_type": "diesel",
+    "transmission": "automatic",
+    "description": "Spacious seven-seater vehicle ideal for family and group travel.",
+    "image": "vehicles/2021-Toyota-Innova-Crysta-Facelift.jpg",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.474Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 9,
+  "fields": {
+    "name": "Classic 350",
+    "brand": "Royal Enfield",
+    "model": "2025",
+    "vehicle_type": "bike",
+    "registration_number": "MH01AA1007",
+    "price_per_day": "900.00",
+    "seats": 2,
+    "fuel_type": "petrol",
+    "transmission": "manual",
+    "description": "Classic motorcycle ideal for city rides and weekend trips.",
+    "image": "vehicles/_DSF2307.jpg.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.477Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 10,
+  "fields": {
+    "name": "MT-15",
+    "brand": "Yamaha",
+    "model": "2025",
+    "vehicle_type": "bike",
+    "registration_number": "MH01AA1008",
+    "price_per_day": "850.00",
+    "seats": 2,
+    "fuel_type": "petrol",
+    "transmission": "manual",
+    "description": "Sporty and lightweight motorcycle for everyday riding.",
+    "image": "vehicles/Yamaha-MT-15-Static-Web.jpg",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.481Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 11,
+  "fields": {
+    "name": "Activa 6G",
+    "brand": "Honda",
+    "model": "2025",
+    "vehicle_type": "bike",
+    "registration_number": "MH01AA1009",
+    "price_per_day": "600.00",
+    "seats": 2,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Comfortable scooter ideal for convenient city transportation.",
+    "image": "vehicles/rmpdpgb_1854140.jpg.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.485Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 12,
+  "fields": {
+    "name": "3 Series",
+    "brand": "BMW",
+    "model": "2025",
+    "vehicle_type": "luxury",
+    "registration_number": "MH01AA1010",
+    "price_per_day": "7500.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Luxury sedan offering a premium driving experience.",
+    "image": "vehicles/bmw-3-series-0-1766208405.jpg.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.488Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 13,
+  "fields": {
+    "name": "C-Class",
+    "brand": "Mercedes-Benz",
+    "model": "2025",
+    "vehicle_type": "luxury",
+    "registration_number": "MH01AA1011",
+    "price_per_day": "8500.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Premium luxury sedan designed for comfort and elegance.",
+    "image": "vehicles/c-class-exterior-left-front-three-quarter-2.jpg.avif",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.492Z"
+  }
+},
+{
+  "model": "rental.vehicle",
+  "pk": 14,
+  "fields": {
+    "name": "A4",
+    "brand": "Audi",
+    "model": "2025",
+    "vehicle_type": "luxury",
+    "registration_number": "MH01AA1012",
+    "price_per_day": "8000.00",
+    "seats": 5,
+    "fuel_type": "petrol",
+    "transmission": "automatic",
+    "description": "Luxury sedan combining performance, comfort and modern design.",
+    "image": "vehicles/ChatGPT_Image_Sep_28_2026_09_24_11_PM.png",
+    "is_available": true,
+    "created_at": "2026-09-28T15:42:04.495Z"
+  }
+}
+]
