@@ -275,7 +275,7 @@
                                 {% if booking.vehicle.image %}
 
                                     <img
-                                        src="{{ booking.vehicle.image.url }}"
+                                        src="{% static booking.vehicle.image.name %}"
                                         alt="{{ booking.vehicle.brand }} {{ booking.vehicle.name }}"
                                     >
 
