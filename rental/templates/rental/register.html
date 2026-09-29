@@ -1,0 +1,465 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register | DriveGo</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            <span class="logo-icon">
+                🚘
+            </span>
+
+            Drive<span>Go</span>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            <a href="{% url 'login' %}"
+               class="login-btn">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     REGISTER
+===================================================== -->
+
+<main>
+
+<section class="auth-section">
+
+
+    <div class="auth-container">
+
+
+        <!-- LEFT INFORMATION PANEL -->
+
+        <div class="auth-info-panel">
+
+
+            <span class="auth-info-label">
+                JOIN DRIVEGO
+            </span>
+
+
+            <h1>
+                Start your journey
+                <span>with us.</span>
+            </h1>
+
+
+            <p>
+                Create your DriveGo account and get access to
+                convenient vehicle rentals, booking management
+                and a smoother way to plan your trips.
+            </p>
+
+
+            <div class="auth-benefits">
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Explore Vehicles
+                        </strong>
+
+                        <span>
+                            Browse cars, bikes, SUVs and luxury vehicles.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Book With Ease
+                        </strong>
+
+                        <span>
+                            Select your dates and reserve your preferred ride.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Manage Your Bookings
+                        </strong>
+
+                        <span>
+                            Keep your rental activity organized in one place.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- REGISTER CARD -->
+
+        <div class="auth-card">
+
+
+            <div class="auth-card-header">
+
+                <div class="auth-logo-mark">
+                    🚘
+                </div>
+
+
+                <div>
+
+                    <p class="auth-label">
+                        DRIVEGO ACCOUNT
+                    </p>
+
+                    <h2>
+                        Create Account
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="auth-subtitle">
+                Create your account to start renting vehicles.
+            </p>
+
+
+
+            <!-- =================================================
+                 MESSAGES
+            ================================================== -->
+
+            {% if messages %}
+
+                <div class="auth-messages">
+
+                    {% for message in messages %}
+
+                        <div class="auth-message">
+
+                            <span>!</span>
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 REGISTER FORM
+            ================================================== -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="auth-form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            id="username"
+                            type="text"
+                            name="username"
+                            placeholder="Choose a username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="auth-form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            ✉️
+                        </span>
+
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="auth-form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="auth-form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            🔐
+                        </span>
+
+                        <input
+                            id="confirm_password"
+                            type="password"
+                            name="confirm_password"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn"
+                >
+
+                    Create Account
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-divider">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+            <p class="auth-bottom-text">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Sign In
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DriveGo.
+                Vehicle Rental Management System.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script src="{% static 'rental/js/script.js' %}"></script>
+
+
+</body>
+
+</html>

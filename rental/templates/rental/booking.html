@@ -1,0 +1,341 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Vehicle | DriveGo</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="{% url 'home' %}" class="logo">
+            🚘 Drive<span>Go</span>
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#contact">
+                Contact
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= BOOKING SECTION ================= -->
+
+<section class="booking-section">
+
+    <div class="container">
+
+        <!-- ================= PAGE HEADING ================= -->
+
+        <div class="booking-header">
+
+            <p>
+                DRIVEGO BOOKING
+            </p>
+
+            <h1>
+                Book Your Vehicle
+            </h1>
+
+            <span>
+                Complete the form below to reserve your vehicle.
+            </span>
+
+        </div>
+
+
+        <!-- ================= BOOKING CARD ================= -->
+
+        <div class="booking-card">
+
+
+            <!-- ================= VEHICLE INFORMATION ================= -->
+
+            <div class="booking-vehicle">
+
+                {% if vehicle.image %}
+
+                    <img
+                        src="{{ vehicle.image.url }}"
+                        alt="{{ vehicle.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="vehicle-placeholder">
+
+                        🚘
+
+                    </div>
+
+                {% endif %}
+
+
+                <h2>
+                    {{ vehicle.brand }} {{ vehicle.name }}
+                </h2>
+
+                <p>
+                    {{ vehicle.model }}
+                </p>
+
+                <p>
+                    {{ vehicle.seats }} Seats
+                    &nbsp; • &nbsp;
+                    {{ vehicle.fuel_type|title }}
+                    &nbsp; • &nbsp;
+                    {{ vehicle.transmission|title }}
+                </p>
+
+                <strong>
+                    ₹{{ vehicle.price_per_day }}
+
+                    <span style="font-size:14px;color:#777;">
+                        / day
+                    </span>
+                </strong>
+
+            </div>
+
+
+            <!-- ================= BOOKING FORM AREA ================= -->
+
+            <div class="booking-form">
+
+
+                <!-- ================= ERROR MESSAGE ================= -->
+
+                {% if error %}
+
+                    <div class="booking-error">
+
+                        ⚠️ {{ error }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- ================= BOOKING FORM ================= -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- ================= CUSTOMER INFORMATION ================= -->
+
+                    <h3>
+                        Customer Information
+                    </h3>
+
+
+                    <!-- Customer Name -->
+
+                    <div class="form-group">
+
+                        <label for="customer_name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customer_name"
+                            name="customer_name"
+                            placeholder="Enter your full name"
+                            value="{{ request.POST.customer_name|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email + Phone -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="customer_email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="customer_email"
+                                name="customer_email"
+                                placeholder="Enter your email"
+                                value="{{ request.POST.customer_email|default:'' }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="customer_phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="customer_phone"
+                                name="customer_phone"
+                                placeholder="Enter your phone number"
+                                value="{{ request.POST.customer_phone|default:'' }}"
+                                maxlength="15"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= RENTAL DETAILS ================= -->
+
+                    <h3>
+                        Rental Details
+                    </h3>
+
+
+                    <!-- Pickup + Return Date -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="pickup_date">
+                                Pickup Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="pickup_date"
+                                name="pickup_date"
+                                value="{{ request.POST.pickup_date|default:'' }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="return_date">
+                                Return Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="return_date"
+                                name="return_date"
+                                value="{{ request.POST.return_date|default:'' }}"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Pickup Location -->
+
+                    <div class="form-group">
+
+                        <label for="pickup_location">
+                            Pickup Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pickup_location"
+                            name="pickup_location"
+                            placeholder="Enter pickup location"
+                            value="{{ request.POST.pickup_location|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ================= BOOKING BUTTON ================= -->
+
+                    <button
+                        type="submit"
+                        class="confirm-booking-btn"
+                    >
+                        Confirm Booking
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DriveGo. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="{% static 'rental/js/script.js' %}"></script>
+
+</body>
+
+</html>

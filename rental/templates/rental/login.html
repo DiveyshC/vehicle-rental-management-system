@@ -1,0 +1,412 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | DriveGo</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            <span class="logo-icon">
+                🚘
+            </span>
+
+            Drive<span>Go</span>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            <a href="{% url 'register' %}"
+               class="register-btn">
+
+                Create Account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<main>
+
+<section class="auth-section">
+
+
+    <div class="auth-container">
+
+
+        <!-- LEFT INFORMATION PANEL -->
+
+        <div class="auth-info-panel">
+
+
+            <span class="auth-info-label">
+                WELCOME TO DRIVEGO
+            </span>
+
+
+            <h1>
+                Your next journey
+                <span>starts here.</span>
+            </h1>
+
+
+            <p>
+                Sign in to manage your vehicle bookings,
+                view your rental history and continue planning
+                your next trip.
+            </p>
+
+
+            <div class="auth-benefits">
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Easy Booking
+                        </strong>
+
+                        <span>
+                            Reserve your preferred vehicle quickly.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Manage Rentals
+                        </strong>
+
+                        <span>
+                            Keep track of your active bookings.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Simple Experience
+                        </strong>
+
+                        <span>
+                            Everything in one convenient place.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- LOGIN CARD -->
+
+        <div class="auth-card">
+
+
+            <div class="auth-card-header">
+
+                <div class="auth-logo-mark">
+                    🚘
+                </div>
+
+
+                <div>
+
+                    <p class="auth-label">
+                        DRIVEGO ACCOUNT
+                    </p>
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="auth-subtitle">
+                Sign in to continue to your account.
+            </p>
+
+
+
+            <!-- =================================================
+                 MESSAGES
+            ================================================== -->
+
+            {% if messages %}
+
+                <div class="auth-messages">
+
+                    {% for message in messages %}
+
+                        <div class="auth-message">
+
+                            <span>!</span>
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================== -->
+
+            <form method="post" action="{% url 'login' %}">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="auth-form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            id="username"
+                            type="text"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="auth-form-group">
+
+                    <div class="auth-label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="{% url 'password_reset' %}">
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn"
+                >
+
+                    Sign In
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- REGISTER -->
+
+            <div class="auth-divider">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+            <p class="auth-bottom-text">
+
+                Don't have an account?
+
+                <a href="{% url 'register' %}">
+                    Create Account
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DriveGo.
+                Vehicle Rental Management System.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script src="{% static 'rental/js/script.js' %}"></script>
+
+
+</body>
+
+</html>

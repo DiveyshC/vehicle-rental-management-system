@@ -1,0 +1,680 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Vehicles | DriveGo
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            🚘 Drive<span>Go</span>
+
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}"
+               class="active">
+
+                Vehicles
+
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
+
+        </nav>
+
+        <div class="nav-buttons">
+
+            {% if request.user.is_authenticated %}
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="login-btn"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="register-btn"
+                >
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'login' %}"
+                    class="login-btn"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="register-btn"
+                >
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     VEHICLES SECTION
+===================================================== -->
+
+<section class="vehicles-section">
+
+    <div class="container">
+
+        <div class="vehicles-header">
+
+            <p>
+                DRIVEGO FLEET
+            </p>
+
+            <h1>
+                Choose Your Vehicle
+            </h1>
+
+            <span>
+                Find the perfect vehicle for your journey.
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH + FILTER
+        ================================================== -->
+
+        <div class="vehicle-filter">
+
+            <form method="GET">
+
+
+                <!-- SEARCH -->
+
+                <div class="filter-group search-group">
+
+                    <label>
+                        Search Vehicle
+                    </label>
+
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ search_query }}"
+                        placeholder="Search by brand, name or model..."
+                    >
+
+                </div>
+
+
+                <!-- TYPE -->
+
+                <div class="filter-group">
+
+                    <label>
+                        Vehicle Type
+                    </label>
+
+                    <select name="type">
+
+                        <option value="">
+                            All Types
+                        </option>
+
+                        <option
+                            value="car"
+                            {% if selected_type == 'car' %}selected{% endif %}
+                        >
+                            Car
+                        </option>
+
+                        <option
+                            value="bike"
+                            {% if selected_type == 'bike' %}selected{% endif %}
+                        >
+                            Bike
+                        </option>
+
+                        <option
+                            value="suv"
+                            {% if selected_type == 'suv' %}selected{% endif %}
+                        >
+                            SUV
+                        </option>
+
+                        <option
+                            value="luxury"
+                            {% if selected_type == 'luxury' %}selected{% endif %}
+                        >
+                            Luxury
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- FUEL -->
+
+                <div class="filter-group">
+
+                    <label>
+                        Fuel
+                    </label>
+
+                    <select name="fuel">
+
+                        <option value="">
+                            All Fuel
+                        </option>
+
+                        <option
+                            value="petrol"
+                            {% if selected_fuel == 'petrol' %}selected{% endif %}
+                        >
+                            Petrol
+                        </option>
+
+                        <option
+                            value="diesel"
+                            {% if selected_fuel == 'diesel' %}selected{% endif %}
+                        >
+                            Diesel
+                        </option>
+
+                        <option
+                            value="electric"
+                            {% if selected_fuel == 'electric' %}selected{% endif %}
+                        >
+                            Electric
+                        </option>
+
+                        <option
+                            value="cng"
+                            {% if selected_fuel == 'cng' %}selected{% endif %}
+                        >
+                            CNG
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TRANSMISSION -->
+
+                <div class="filter-group">
+
+                    <label>
+                        Transmission
+                    </label>
+
+                    <select name="transmission">
+
+                        <option value="">
+                            All
+                        </option>
+
+                        <option
+                            value="manual"
+                            {% if selected_transmission == 'manual' %}selected{% endif %}
+                        >
+                            Manual
+                        </option>
+
+                        <option
+                            value="automatic"
+                            {% if selected_transmission == 'automatic' %}selected{% endif %}
+                        >
+                            Automatic
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SORT -->
+
+                <div class="filter-group">
+
+                    <label>
+                        Sort By
+                    </label>
+
+                    <select name="sort">
+
+                        <option
+                            value="newest"
+                            {% if selected_sort == 'newest' %}selected{% endif %}
+                        >
+                            Newest
+                        </option>
+
+                        <option
+                            value="price_low"
+                            {% if selected_sort == 'price_low' %}selected{% endif %}
+                        >
+                            Price: Low to High
+                        </option>
+
+                        <option
+                            value="price_high"
+                            {% if selected_sort == 'price_high' %}selected{% endif %}
+                        >
+                            Price: High to Low
+                        </option>
+
+                        <option
+                            value="name"
+                            {% if selected_sort == 'name' %}selected{% endif %}
+                        >
+                            Name: A-Z
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="filter-btn"
+                >
+                    Search & Filter
+                </button>
+
+
+                <!-- CLEAR -->
+
+                <a
+                    href="{% url 'vehicles' %}"
+                    class="clear-filter-btn"
+                >
+                    Clear
+                </a>
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================================
+             RESULTS HEADER
+        ================================================== -->
+
+        <div class="vehicle-results-header">
+
+            <div>
+
+                <p>
+                    AVAILABLE VEHICLES
+                </p>
+
+                <h2>
+                    {{ vehicles|length }} Vehicles Found
+                </h2>
+
+            </div>
+
+            {% if search_query %}
+
+                <span>
+
+                    Search results for
+                    "<strong>{{ search_query }}</strong>"
+
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =================================================
+             VEHICLE LIST
+        ================================================== -->
+
+        {% if vehicles %}
+
+            <div class="vehicle-grid">
+
+                {% for vehicle in vehicles %}
+
+                    <div class="vehicle-card">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="vehicle-image">
+
+                            {% if vehicle.image %}
+
+                                <img
+                                    src="{{ vehicle.image.url }}"
+                                    alt="{{ vehicle.brand }} {{ vehicle.name }}"
+                                >
+
+                            {% else %}
+
+                                <div class="vehicle-placeholder">
+
+                                    {% if vehicle.vehicle_type == 'bike' %}
+
+                                        🏍️
+
+                                    {% elif vehicle.vehicle_type == 'suv' %}
+
+                                        🚙
+
+                                    {% elif vehicle.vehicle_type == 'luxury' %}
+
+                                        🚘
+
+                                    {% else %}
+
+                                        🚗
+
+                                    {% endif %}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- CONTENT -->
+
+                        <div class="vehicle-card-content">
+
+                            <span class="vehicle-category">
+
+                                {{ vehicle.get_vehicle_type_display }}
+
+                            </span>
+
+
+                            <h3>
+
+                                {{ vehicle.brand }}
+                                {{ vehicle.name }}
+
+                            </h3>
+
+
+                            <p class="vehicle-model">
+
+                                {{ vehicle.model }}
+
+                            </p>
+
+
+                            <div class="vehicle-spec-row">
+
+                                <span>
+                                    👤 {{ vehicle.seats }} Seats
+                                </span>
+
+                                <span>
+                                    ⛽ {{ vehicle.fuel_type|title }}
+                                </span>
+
+                                <span>
+                                    ⚙️ {{ vehicle.transmission|title }}
+                                </span>
+
+                            </div>
+
+
+                            {% if vehicle.description %}
+
+                                <p class="vehicle-description">
+
+                                    {{ vehicle.description|truncatechars:90 }}
+
+                                </p>
+
+                            {% endif %}
+
+
+                            <div class="vehicle-card-bottom">
+
+                                <div>
+
+                                    <strong>
+                                        ₹{{ vehicle.price_per_day }}
+                                    </strong>
+
+                                    <span>
+                                        / day
+                                    </span>
+
+                                </div>
+
+                                <a
+                                    href="{% url 'vehicle_detail' vehicle.id %}"
+                                    class="vehicle-view-btn"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- =================================================
+                 NO RESULTS
+            ================================================== -->
+
+            <div class="no-vehicles-message">
+
+                <div class="no-vehicles-icon">
+                    🚘
+                </div>
+
+                <h2>
+                    No Vehicles Found
+                </h2>
+
+                <p>
+                    Try changing your search or filter options.
+                </p>
+
+                <a
+                    href="{% url 'vehicles' %}"
+                    class="dashboard-book-btn"
+                >
+                    View All Vehicles
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer
+    class="footer"
+    id="contact"
+>
+
+    <div class="container footer-grid">
+
+
+        <div class="footer-brand">
+
+            <a
+                href="{% url 'home' %}"
+                class="logo footer-logo"
+            >
+                🚘 Drive<span>Go</span>
+            </a>
+
+            <p>
+                A modern vehicle rental management platform
+                for a simple and reliable rental experience.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Services
+            </h3>
+
+            <a href="{% url 'vehicles' %}">
+                Car Rental
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Bike Rental
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                SUV Rental
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Luxury Rental
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Mumbai, Maharashtra
+            </p>
+
+            <p>
+                📞 +91 98765 43210
+            </p>
+
+            <p>
+                ✉️ support@drivego.com
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 DriveGo.
+            Vehicle Rental Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

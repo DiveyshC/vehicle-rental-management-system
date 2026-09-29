@@ -1,0 +1,951 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="icon" href="data:,">
+
+    <style>
+.drivego-mark {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto 25px;
+    background: radial-gradient(circle, rgba(30,90,150,0.25), transparent 65%);
+}
+
+.drivego-mark-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #0b2d55;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 800;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+}
+
+.drivego-mark-line {
+    position: absolute;
+    width: 185px;
+    height: 185px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+}
+</style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DriveGo | Premium Vehicle Rental</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="{% url 'home' %}" class="logo">
+            🚘 Drive<span>Go</span>
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}" class="active">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
+
+        </nav>
+
+        <div class="nav-buttons">
+
+            {% if request.user.is_authenticated %}
+
+    <span class="user-welcome">
+        👤 Hi, {{ request.user.first_name|default:request.user.username }}
+    </span>
+
+    <a href="{% url 'dashboard' %}" class="login-btn">
+        Dashboard
+    </a>
+
+    <a href="{% url 'logout' %}" class="register-btn">
+        Logout
+    </a>
+
+{% else %}
+
+    <a href="{% url 'login' %}" class="login-btn">
+        Login
+    </a>
+
+    <a href="{% url 'register' %}" class="register-btn">
+        Register
+    </a>
+
+{% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <p class="hero-small-title">
+                PREMIUM VEHICLE RENTAL
+            </p>
+
+            <h1>
+                Your Journey.
+                <br>
+                <span>Your Perfect Ride.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover a carefully selected range of cars,
+                bikes, SUVs and luxury vehicles. Choose your
+                ride, select your dates and book with confidence.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'vehicles' %}"
+                   class="primary-btn">
+                    Explore Vehicles
+                    <span>→</span>
+                </a>
+
+                <a href="#how-it-works"
+                   class="secondary-btn">
+                    How It Works
+                </a>
+
+            </div>
+
+            <div class="hero-trust">
+
+                <div class="hero-trust-item">
+                    <strong>Easy</strong>
+                    <span>Booking</span>
+                </div>
+
+                <div class="hero-trust-divider"></div>
+
+                <div class="hero-trust-item">
+                    <strong>Flexible</strong>
+                    <span>Rental</span>
+                </div>
+
+                <div class="hero-trust-divider"></div>
+
+                <div class="hero-trust-item">
+                    <strong>Reliable</strong>
+                    <span>Vehicles</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="hero-card-top">
+
+                <div>
+
+                    <span class="hero-card-label">
+                        DRIVEGO FLEET
+                    </span>
+
+                    <span class="hero-card-title">
+                        Ready for the road
+                    </span>
+
+                </div>
+
+                <span class="available-status">
+                    <span class="available-dot"></span>
+                    Available
+                </span>
+
+            </div>
+
+            <div class="vehicle-preview">
+
+                <div class="vehicle-preview-glow"></div>
+
+                <div class="vehicle-icon">
+    <div class="drivego-mark">
+        <span class="drivego-mark-icon">D</span>
+        <span class="drivego-mark-line"></span>
+    </div>
+</div>
+
+                <h3>
+                    Find Your Next Ride
+                </h3>
+
+                <p>
+                    Cars · Bikes · SUVs · Luxury
+                </p>
+
+            </div>
+
+            <div class="hero-card-bottom">
+
+                <div>
+
+                    <span>
+                        Simple booking
+                    </span>
+
+                    <strong>
+                        Ready when you are
+                    </strong>
+
+                </div>
+
+                <a href="{% url 'vehicles' %}">
+                    →
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<section class="search-section">
+
+    <div class="container">
+
+        <div class="search-box">
+
+            <div class="search-item">
+
+                <label>
+                    Vehicle Type
+                </label>
+
+                <select>
+
+                    <option>All Vehicles</option>
+                    <option>Car</option>
+                    <option>Bike</option>
+                    <option>SUV</option>
+                    <option>Luxury</option>
+
+                </select>
+
+            </div>
+
+            <div class="search-item">
+
+                <label>
+                    Pickup Date
+                </label>
+
+                <input type="date">
+
+            </div>
+
+            <div class="search-item">
+
+                <label>
+                    Return Date
+                </label>
+
+                <input type="date">
+
+            </div>
+
+            <a href="{% url 'vehicles' %}"
+               class="search-btn">
+
+                Search Vehicles
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     VEHICLES
+===================================================== -->
+
+<section class="vehicles-section"
+         id="vehicles">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p>
+                OUR FLEET
+            </p>
+
+            <h2>
+                Find The Right Vehicle
+                For Your Journey
+            </h2>
+
+            <span>
+                Explore our available vehicles and choose the
+                one that fits your travel plans.
+            </span>
+
+        </div>
+
+
+        {% if vehicles %}
+
+            <div class="vehicle-grid">
+
+                {% for vehicle in vehicles %}
+
+                    <div class="vehicle-card">
+
+                        <div class="vehicle-image">
+
+                            {% if vehicle.image %}
+
+                                <img
+                                    src="{{ vehicle.image.url }}"
+                                    alt="{{ vehicle.brand }} {{ vehicle.name }}"
+                                >
+
+                            {% else %}
+
+                                <div class="big-vehicle-icon">
+
+                                    {% if vehicle.vehicle_type == 'bike' %}
+                                        🏍️
+                                    {% elif vehicle.vehicle_type == 'suv' %}
+                                        🚙
+                                    {% elif vehicle.vehicle_type == 'luxury' %}
+                                        🚘
+                                    {% else %}
+                                        🚗
+                                    {% endif %}
+
+                                </div>
+
+                            {% endif %}
+
+                            <span class="vehicle-category">
+                                {{ vehicle.get_vehicle_type_display }}
+                            </span>
+
+                        </div>
+
+                        <div class="vehicle-info">
+
+                            <h3>
+                                {{ vehicle.brand }}
+                                {{ vehicle.name }}
+                            </h3>
+
+                            <p class="vehicle-meta">
+
+                                {{ vehicle.transmission|title }}
+
+                                <span>•</span>
+
+                                {{ vehicle.seats }} Seats
+
+                                <span>•</span>
+
+                                {{ vehicle.fuel_type|title }}
+
+                            </p>
+
+                            <div class="vehicle-bottom">
+
+                                <div>
+
+                                    <strong>
+                                        ₹{{ vehicle.price_per_day }}
+                                    </strong>
+
+                                    <span>
+                                        / day
+                                    </span>
+
+                                </div>
+
+                                <a
+                                    href="{% url 'vehicle_detail' vehicle.id %}"
+                                    class="book-btn"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="no-vehicles-message">
+
+                <div class="no-vehicles-icon">
+                    🚘
+                </div>
+
+                <h3>
+                    No Vehicles Available
+                </h3>
+
+                <p>
+                    Our fleet is currently being updated.
+                    Please check back shortly.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="center-button">
+
+            <a href="{% url 'vehicles' %}"
+               class="outline-btn">
+
+                View All Vehicles
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="why-section"
+         id="services">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p>
+                WHY DRIVEGO
+            </p>
+
+            <h2>
+                Built Around A Better
+                Rental Experience
+            </h2>
+
+            <span>
+                Everything you need for a simple and dependable
+                vehicle rental experience.
+            </span>
+
+        </div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    Safe & Reliable
+                </h3>
+
+                <p>
+                    Vehicles are maintained and prepared to
+                    provide a dependable rental experience.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💳
+                </div>
+
+                <h3>
+                    Clear Pricing
+                </h3>
+
+                <p>
+                    Check the rental price before booking and
+                    keep your trip planning simple.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Easy Booking
+                </h3>
+
+                <p>
+                    Select your vehicle, provide your details
+                    and complete your booking in a few steps.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📞
+                </div>
+
+                <h3>
+                    Customer Support
+                </h3>
+
+                <p>
+                    Get assistance whenever you need help
+                    during your rental experience.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="center-button"
+             style="margin-top: 35px;">
+
+            <a href="{% url 'services' %}"
+               class="outline-btn">
+
+                View All Services
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="how-section"
+         id="how-it-works">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p>
+                HOW IT WORKS
+            </p>
+
+            <h2>
+                Rent Your Vehicle In
+                Three Simple Steps
+            </h2>
+
+            <span>
+                From choosing a vehicle to starting your journey,
+                the process stays simple.
+            </span>
+
+        </div>
+
+        <div class="steps-grid">
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Choose Your Vehicle
+                </h3>
+
+                <p>
+                    Browse the available fleet and find a vehicle
+                    that matches your requirements.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Complete Your Booking
+                </h3>
+
+                <p>
+                    Select your rental dates and provide the
+                    required customer information.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Start Your Journey
+                </h3>
+
+                <p>
+                    Complete the payment process and get ready
+                    to enjoy your selected vehicle.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="about-section"
+         id="about">
+
+    <div class="container about-container">
+
+        <div class="about-content">
+
+            <p class="section-label">
+                ABOUT DRIVEGO
+            </p>
+
+            <h2>
+                A Smarter Way To
+                Rent Your Next Vehicle
+            </h2>
+
+            <p>
+                DriveGo is a vehicle rental management platform
+                designed to make the rental process simple,
+                convenient and easy to manage.
+            </p>
+
+            <p>
+                Customers can explore available vehicles,
+                compare rental options, make bookings and
+                manage their rental activity from one place.
+            </p>
+
+            <a href="{% url 'vehicles' %}"
+               class="primary-btn">
+
+                Explore Our Fleet
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+        <div class="about-stat-box">
+
+            <div class="stat">
+
+                <strong>
+                    01
+                </strong>
+
+                <span>
+                    Simple booking platform
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>
+                    02
+                </strong>
+
+                <span>
+                    Multiple vehicle categories
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>
+                    03
+                </strong>
+
+                <span>
+                    Flexible rental dates
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>
+                    04
+                </strong>
+
+                <span>
+                    Booking management
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta-section">
+
+    <div class="container cta-content">
+
+        <div>
+
+            <p>
+                READY TO HIT THE ROAD?
+            </p>
+
+            <h2>
+                Find Your Perfect Ride Today.
+            </h2>
+
+        </div>
+
+        <a href="{% url 'vehicles' %}"
+           class="cta-btn">
+
+            Explore Vehicles
+            <span>→</span>
+
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer"
+        id="contact">
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <a href="{% url 'home' %}"
+               class="logo footer-logo">
+
+                <span class="logo-icon">
+                    🚘
+                </span>
+
+                Drive<span>Go</span>
+
+            </a>
+
+            <p>
+                A modern vehicle rental management platform
+                designed to make finding and booking your
+                next ride simple.
+            </p>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h3>
+                Vehicle Types
+            </h3>
+
+            <a href="{% url 'vehicles' %}">
+                Cars
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Bikes
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                SUVs
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Luxury Vehicles
+            </a>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Mumbai, Maharashtra
+            </p>
+
+            <p>
+                📞 +91 98765 43210
+            </p>
+
+            <p>
+                ✉️ support@drivego.com
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 DriveGo.
+            Vehicle Rental Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="{% static 'rental/js/script.js' %}"></script>
+
+</body>
+
+</html>

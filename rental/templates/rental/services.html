@@ -1,0 +1,591 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DriveGo | Services</title>
+
+    <link rel="stylesheet"
+          href="{% static 'rental/css/style.css' %}">
+
+    <style>
+
+        .services-page {
+            padding: 80px 0 100px;
+            background: #f7f9fc;
+        }
+
+        .services-hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 55px;
+        }
+
+        .services-hero-label {
+            color: #417690;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .services-hero h1 {
+            font-size: 46px;
+            line-height: 1.15;
+            color: #172b4d;
+            margin: 0 0 18px;
+        }
+
+        .services-hero p {
+            color: #6b7280;
+            font-size: 17px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-page-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid #e8edf3;
+            box-shadow: 0 8px 25px rgba(20, 40, 70, 0.07);
+            transition: all 0.25s ease;
+        }
+
+        .service-page-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(20, 40, 70, 0.12);
+        }
+
+        .service-page-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            background: #eef5fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            margin-bottom: 22px;
+        }
+
+        .service-page-card h3 {
+            color: #172b4d;
+            font-size: 21px;
+            margin: 0 0 12px;
+        }
+
+        .service-page-card p {
+            color: #6b7280;
+            line-height: 1.7;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .services-cta {
+            margin-top: 65px;
+            background: #172b4d;
+            border-radius: 18px;
+            padding: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .services-cta h2 {
+            color: #ffffff;
+            font-size: 30px;
+            margin: 0 0 8px;
+        }
+
+        .services-cta p {
+            color: #cbd5e1;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .services-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            color: #172b4d !important;
+            padding: 14px 23px;
+            border-radius: 8px;
+            text-decoration: none !important;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: 0.2s ease;
+        }
+
+        .services-cta-btn:hover {
+            transform: translateY(-2px);
+            background: #f1f5f9;
+        }
+
+        @media (max-width: 900px) {
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-hero h1 {
+                font-size: 38px;
+            }
+
+            .services-cta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .services-page {
+                padding: 55px 0 70px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-hero h1 {
+                font-size: 32px;
+            }
+
+            .services-hero p {
+                font-size: 15px;
+            }
+
+            .service-page-card {
+                padding: 25px;
+            }
+
+            .services-cta {
+                padding: 30px 24px;
+            }
+
+            .services-cta h2 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="{% url 'home' %}" class="logo">
+
+            <span class="logo-icon">🚘</span>
+
+            Drive<span>Go</span>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}" class="active">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}"
+                   class="login-btn">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="register-btn">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="login-btn">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}"
+                   class="register-btn">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     SERVICES PAGE
+===================================================== -->
+
+<main>
+
+<section class="services-page">
+
+    <div class="container">
+
+
+        <div class="services-hero">
+
+            <div class="services-hero-label">
+                OUR SERVICES
+            </div>
+
+            <h1>
+                Everything You Need
+                For A Better Rental Experience
+            </h1>
+
+            <p>
+                DriveGo provides a simple and convenient vehicle
+                rental experience, from selecting your vehicle
+                to managing your booking.
+            </p>
+
+        </div>
+
+
+
+        <div class="services-grid">
+
+
+            <div class="service-page-card">
+
+                <div class="service-page-icon">
+                    🚗
+                </div>
+
+                <h3>
+                    Wide Vehicle Selection
+                </h3>
+
+                <p>
+                    Choose from cars, bikes, SUVs and luxury
+                    vehicles according to your travel needs
+                    and preferences.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-page-card">
+
+                <div class="service-page-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Flexible Booking
+                </h3>
+
+                <p>
+                    Select your pickup and return dates and
+                    complete your vehicle booking through a
+                    simple process.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-page-card">
+
+                <div class="service-page-icon">
+                    💳
+                </div>
+
+                <h3>
+                    Easy Payment
+                </h3>
+
+                <p>
+                    Complete your booking payment through the
+                    integrated payment step and receive your
+                    booking confirmation.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-page-card">
+
+                <div class="service-page-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Booking Management
+                </h3>
+
+                <p>
+                    View your bookings, check booking details
+                    and manage your rental activity from your
+                    dashboard.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-page-card">
+
+                <div class="service-page-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    Reliable Vehicles
+                </h3>
+
+                <p>
+                    Explore the available fleet and choose
+                    vehicles that are currently listed as
+                    available for rental.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-page-card">
+
+                <div class="service-page-icon">
+                    📞
+                </div>
+
+                <h3>
+                    Customer Support
+                </h3>
+
+                <p>
+                    Get support whenever you need assistance
+                    with your vehicle rental and booking
+                    experience.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="services-cta">
+
+            <div>
+
+                <h2>
+                    Ready To Find Your Ride?
+                </h2>
+
+                <p>
+                    Explore our available vehicles and start
+                    your booking today.
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'vehicles' %}"
+               class="services-cta-btn">
+
+                Explore Vehicles
+
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div class="footer-brand">
+
+            <a href="{% url 'home' %}"
+               class="logo footer-logo">
+
+                <span class="logo-icon">
+                    🚘
+                </span>
+
+                Drive<span>Go</span>
+
+            </a>
+
+            <p>
+                A modern vehicle rental management platform
+                designed to make finding and booking your
+                next ride simple.
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Vehicles
+            </a>
+
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h3>
+                Vehicle Types
+            </h3>
+
+            <a href="{% url 'vehicles' %}">
+                Cars
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Bikes
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                SUVs
+            </a>
+
+            <a href="{% url 'vehicles' %}">
+                Luxury Vehicles
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Mumbai, Maharashtra
+            </p>
+
+            <p>
+                📞 +91 98765 43210
+            </p>
+
+            <p>
+                ✉️ support@drivego.com
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 DriveGo.
+            Vehicle Rental Management System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

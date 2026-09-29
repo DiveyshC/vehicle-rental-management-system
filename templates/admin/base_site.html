@@ -1,0 +1,180 @@
+{% extends "admin/base.html" %}
+
+{% block title %}DriveGo Admin{% endblock %}
+
+{% block branding %}
+<div style="
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:5px 0;
+">
+    <div style="
+        width:42px;
+        height:42px;
+        border-radius:12px;
+        background:linear-gradient(135deg,#168cff,#0058c7);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:22px;
+    ">
+        🚗
+    </div>
+
+    <div>
+        <div style="
+            font-size:22px;
+            font-weight:800;
+            color:white;
+        ">
+            DriveGo
+        </div>
+
+        <div style="
+            font-size:11px;
+            color:#8ea9c7;
+        ">
+            Vehicle Rental Management
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block nav-global %}
+{% endblock %}
+
+{% block extrastyle %}
+<style>
+/* =========================================
+   DRIVEGO ADMIN TABLES
+========================================= */
+
+#changelist {
+    background: #08182b;
+}
+
+#changelist .results {
+    border: 1px solid #244563;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0d223b;
+}
+
+#changelist table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: max-content;
+    min-width: 100%;
+}
+
+#changelist .results {
+    overflow-x: auto;
+}
+
+#changelist th,
+#changelist td {
+    white-space: nowrap;
+}
+
+#changelist thead th {
+    background: #123452 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    padding: 13px 10px !important;
+    border-bottom: 1px solid #2b5275 !important;
+}
+
+#changelist tbody tr {
+    background: #0d223b;
+}
+
+#changelist tbody tr:nth-child(even) {
+    background: #102944;
+}
+
+#changelist tbody tr:hover {
+    background: #163b5c !important;
+}
+
+#changelist tbody td {
+    color: #e7f1ff !important;
+    padding: 11px 10px !important;
+    border-bottom: 1px solid rgba(255,255,255,.06) !important;
+    font-size: 13px !important;
+}
+
+#changelist tbody td a {
+    color: #55b8ff !important;
+    font-weight: 600;
+}
+
+#changelist tbody td a:hover {
+    color: #ffffff !important;
+}
+
+/* Search box */
+
+#toolbar {
+    background: #0d223b !important;
+    border: 1px solid #244563 !important;
+    border-radius: 10px;
+    padding: 12px !important;
+}
+
+#toolbar input[type="text"] {
+    background: #07172a !important;
+    color: white !important;
+    border: 1px solid #315575 !important;
+    border-radius: 7px;
+    padding: 9px 12px !important;
+}
+
+#toolbar input[type="submit"] {
+    background: #168cff !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 7px;
+    padding: 9px 18px !important;
+    font-weight: 600;
+}
+
+/* Filter sidebar */
+
+#changelist-filter {
+    background: #0d223b !important;
+    border-left: 1px solid #244563 !important;
+}
+
+#changelist-filter h2 {
+    background: #123452 !important;
+    color: white !important;
+}
+
+#changelist-filter h3 {
+    color: #78c7ff !important;
+}
+
+#changelist-filter a {
+    color: #dcecff !important;
+}
+
+#changelist-filter a:hover {
+    color: #55b8ff !important;
+}
+
+/* Add booking button */
+
+.object-tools a {
+    background: #168cff !important;
+    border-radius: 7px !important;
+    font-weight: 700 !important;
+}
+
+.object-tools a:hover {
+    background: #0b70d1 !important;
+}
+</style>
+{% endblock %}
