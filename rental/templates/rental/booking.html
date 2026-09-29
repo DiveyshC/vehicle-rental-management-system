@@ -91,9 +91,9 @@
                 {% if vehicle.image %}
 
                     <img
-                        src="{{ vehicle.image.url }}"
-                        alt="{{ vehicle.name }}"
-                    >
+    src="{% static vehicle.image.name %}"
+    alt="{{ vehicle.name }}"
+>
 
                 {% else %}
 
